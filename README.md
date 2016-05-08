@@ -1,4 +1,4 @@
-![https://pbs.twimg.com/profile_images/729276089399267328/GYkCBGRm.jpg](Gochisua One-Hour Drawing)
+![Gochisua One-Hour Drawing](https://pbs.twimg.com/profile_images/729276089399267328/GYkCBGRm.jpg)
 
 # gochiusa-onedraw-bot
 
