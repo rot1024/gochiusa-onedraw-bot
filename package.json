@@ -1,0 +1,31 @@
+{
+  "name": "gochiusa-onedraw-bot",
+  "version": "1.0.0",
+  "description": "One-hour drawing bot for gochiusa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rot1024/gochiusa-onedraw-bot.git"
+  },
+  "author": "rot1024",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rot1024/gochiusa-onedraw-bot/issues"
+  },
+  "homepage": "https://github.com/rot1024/gochiusa-onedraw-bot#readme",
+  "engines": {
+    "node": "6.x"
+  },
+  "dependencies": {
+    "cron": "^1.1.0",
+    "twit": "^2.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0",
+    "eslint-plugin-node": "^1.2.1"
+  }
+}
