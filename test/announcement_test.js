@@ -8,7 +8,7 @@ describe("announcement", () => {
   it("should generate notice announcement", () => {
     const text = announcement.getAnnouncement({
       themes: ["ココア", "チノ", "リゼ", "ティッピー"],
-      date: new Date("2016-05-07 00:00:00")
+      date: new Date("2016-05-07T09:00:00.000Z")
     });
     assert.strictEqual(text, (
 `次回5月7日22時より開始します。
@@ -21,7 +21,7 @@ describe("announcement", () => {
   it("should generate start announcement", () => {
     const text = announcement.getStartAnnouncement({
       themes: ["ココア", "チノ", "リゼ", "ティッピー"],
-      date: new Date("2016-05-08 00:00:00")
+      date: new Date("2016-05-07T09:00:00.000Z")
     });
     assert.strictEqual(text, (
 `開始の時間となりました、タグを付けてご参加ください。
