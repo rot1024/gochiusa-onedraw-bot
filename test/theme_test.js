@@ -6,7 +6,7 @@ const theme = require("../lib/theme");
 
 describe("theme", () => {
 
-  it("should generate next context", () => {
+  it("should generate next themes", () => {
 
     const themes = theme.generateThemes(
       [
@@ -63,6 +63,17 @@ describe("theme", () => {
         "あんこ"
       ]
     ).length, 0);
+
+  });
+
+  it("should generate next context", () => {
+
+    const ctx = theme.getNextContext({
+      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
+    });
+
+    assert(Array.isArray(ctx.themes));
+    assert.strictEqual(new Date().getDate() + 1, ctx.date.getDate());
 
   });
 
