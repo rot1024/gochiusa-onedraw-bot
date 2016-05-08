@@ -7,14 +7,15 @@ const gochiusa = require("./lib");
 
 const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
 
-  const hour = moment().tz(gochiusa.config.timezone).hour();
+  const now = new Date();
+  const hour = moment(now).tz(gochiusa.config.timezone).hour();
   const context = yield gochiusa.storage.getContext();
 
   if (hour === 19) {
 
     // Detect and save themes
 
-    const nextContext = gochiusa.theme.getNextContext(context);
+    const nextContext = gochiusa.theme.getNextContext(context, now);
     yield gochiusa.storage.saveContext(nextContext);
 
   } else if (hour === 20) {

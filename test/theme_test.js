@@ -69,11 +69,12 @@ describe("theme", () => {
   it("should generate next context", () => {
 
     const ctx = theme.getNextContext({
-      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
-    });
+      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"],
+      date: new Date("2016-05-06T09:00:00.000Z")
+    }, new Date("2016-05-07T09:00:00.000Z"));
 
     assert(Array.isArray(ctx.themes));
-    assert.strictEqual(new Date().getDate() + 1, ctx.date.getDate());
+    assert.strictEqual(ctx.date.getDate(), 7);
 
   });
 
