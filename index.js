@@ -2,11 +2,12 @@
 
 const co = require("co");
 const cron = require("cron");
+const moment = require("moment-timezone");
 const gochiusa = require("./lib");
 
-const job = new cron.CronJob("0 0 19-23 * * *", () => co(function *() {
+const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
 
-  const hour = new Date().getHours();
+  const hour = moment().tz(gochiusa.config.timezone).hour();
   const context = yield gochiusa.storage.getContext();
 
   if (hour === 19) {
