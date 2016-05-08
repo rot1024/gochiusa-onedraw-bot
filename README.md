@@ -1,6 +1,8 @@
+![https://pbs.twimg.com/profile_images/729276089399267328/GYkCBGRm.jpg](Gochisua One-Hour Drawing)
+
 # gochiusa-onedraw-bot
 
-One-hour drawing bot for gochiusa
+One-hour drawing twitter bot for gochiusa
 
 REQUIRED: Node.js v6.x
 
