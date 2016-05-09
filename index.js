@@ -8,7 +8,7 @@ const gochiusa = require("./lib");
 
 function log(tag, text, date) {
   console.log(
-    c.cyan(moment(date).tz(gochiusa.config.timezone).format("YYYY/MM/DD hh:mm:ss")),
+    c.cyan(moment(date).tz(gochiusa.config.timezone).format("YYYY/MM/DD HH:mm:ss")),
     `[${c.yellow(tag)}]`,
     text.replace(/\n/g, " ")
   );
