@@ -20,6 +20,7 @@ module.exports = (log, debug) => ({
 
     log("gentheme", nextContext.themes.join(", "));
 
+    return nextContext;
   }),
   announce: () => co(function *() {
 
@@ -32,6 +33,7 @@ module.exports = (log, debug) => ({
 
     log("notice");
 
+    return context;
   }),
   start: () => co(function *() {
 
@@ -42,6 +44,7 @@ module.exports = (log, debug) => ({
 
     log("start");
 
+    return context;
   }),
   finish: () => co(function *() {
 
@@ -52,5 +55,6 @@ module.exports = (log, debug) => ({
 
     log("finish");
 
+    return context;
   })
 });
