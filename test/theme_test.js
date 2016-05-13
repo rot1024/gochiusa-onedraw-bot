@@ -69,12 +69,12 @@ describe("theme", () => {
   it("should generate next context", () => {
 
     const ctx = theme.getNextContext({
-      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"],
-      date: new Date("2016-05-06T09:00:00.000Z")
-    }, new Date("2016-05-07T09:00:00.000Z"));
+      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
+    }, ["ココア", "千夜", "リゼ", "シャロ"]);
 
-    assert(Array.isArray(ctx.themes));
-    assert.strictEqual(ctx.date.getDate(), 7);
+    assert.deepEqual(ctx, {
+      themes: ["ココア", "千夜", "リゼ", "シャロ"]
+    });
 
   });
 

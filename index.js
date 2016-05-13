@@ -18,13 +18,19 @@ const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
 
   const now = new Date();
   const hour = moment(now).tz(gochiusa.config.timezone).hour();
+
   const context = yield gochiusa.storage.getContext();
 
   if (hour === 19) {
 
     // Decide and save themes
 
-    const nextContext = gochiusa.theme.getNextContext(context, now);
+    const themes = gochiusa.theme.generateThemes(
+      gochiusa.config.themes,
+      context.themes,
+      gochiusa.config.themeCount
+    );
+    const nextContext = gochiusa.theme.getNextContext(context, themes);
     yield gochiusa.storage.saveContext(nextContext);
 
     log("gentheme", nextContext.themes.join(", "), now);
@@ -33,7 +39,7 @@ const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
 
     // Tweet notice announcement
 
-    const text = gochiusa.announcement.getAnnouncement(context);
+    const text = gochiusa.announcement.getAnnouncement(context, now);
     yield gochiusa.twitter.tweet(text);
 
     log("notice", text, now);
