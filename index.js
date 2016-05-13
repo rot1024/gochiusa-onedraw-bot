@@ -4,71 +4,43 @@ const co = require("co");
 const cron = require("cron");
 const moment = require("moment-timezone");
 const c = require("colors/safe");
-const gochiusa = require("./lib");
 
-function log(tag, text, date) {
+const gochiusa = require("./lib");
+const debug = process.argv.slice(1).includes("--debug");
+const jobs = require("./jobs")(log, debug);
+
+function log(tag, text) {
   console.log(
-    c.cyan(moment(date).tz(gochiusa.config.timezone).format("YYYY/MM/DD HH:mm:ss")),
+    c.cyan(moment().tz(gochiusa.config.timezone).format("YYYY/MM/DD HH:mm:ss")),
     `[${c.yellow(tag)}]`,
-    text.replace(/\n/g, " ")
+    text ? text.replace(/\n/g, " ") : ""
   );
 }
 
-const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
+function createCronJob(schedule, fn) {
+  return new cron.CronJob(schedule, () => co(function *() {
+    const i = fn(moment().tz(gochiusa.config.timezone));
+    const j = [
+      jobs.generateThemes,
+      jobs.announce,
+      jobs.start,
+      jobs.finish
+    ];
+    if (typeof j[i] === "function") {
+      yield j[i]();
+    } else {
+      log("WARN", "invalid mode: " + i);
+    }
+  }).catch(err => {
+    console.error(err.stack || err);
+    process.exit(1); // eslint-disable-line no-process-exit
+  }), null, false, gochiusa.config.timezone);
+}
 
-  const now = new Date();
-  const hour = moment(now).tz(gochiusa.config.timezone).hour();
-
-  const context = yield gochiusa.storage.getContext();
-
-  if (hour === 19) {
-
-    // Decide and save themes
-
-    const themes = gochiusa.theme.generateThemes(
-      gochiusa.config.themes,
-      context.themes,
-      gochiusa.config.themeCount
-    );
-    const nextContext = gochiusa.theme.getNextContext(context, themes);
-    yield gochiusa.storage.saveContext(nextContext);
-
-    log("gentheme", nextContext.themes.join(", "), now);
-
-  } else if (hour === 20) {
-
-    // Tweet notice announcement
-
-    const text = gochiusa.announcement.getAnnouncement(context, now);
-    yield gochiusa.twitter.tweet(text);
-
-    log("notice", text, now);
-
-  } else if (hour === 22) {
-
-    // Tweet start announcement
-
-    const text = gochiusa.announcement.getStartAnnouncement(context);
-    yield gochiusa.twitter.tweet(text);
-
-    log("start", text, now);
-
-  } else if (hour === 23) {
-
-    // Tweet finish announcement
-
-    const text = gochiusa.announcement.getFinishAnnouncement(context);
-    yield gochiusa.twitter.tweet(text);
-
-    log("finish", text, now);
-
-  }
-
-}).catch(err => {
-  console.error(err.stack || err);
-  process.exit(1); // eslint-disable-line no-process-exit
-}), null, false, gochiusa.config.timezone);
+const job = debug ?
+  createCronJob("* * * * * *", date => date.second() % 4) :
+  createCronJob("0 0 19,20,22,23 * * *", date => [19, 20, 22, 23].indexOf(date.hour()));
 
 job.start();
 
-log("run", "gochiusa-onedraw-bot started");
+log("run", "gochiusa-onedraw-bot started" + (debug ? " [DEBUG]" : ""));

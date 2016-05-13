@@ -1,0 +1,56 @@
+"use strict";
+
+const co = require("co");
+const gochiusa = require("./lib");
+
+module.exports = (log, debug) => ({
+  generateThemes: () => co(function *() {
+
+    const context = yield gochiusa.storage.getContext();
+
+    // Decide and save themes
+
+    const themes = gochiusa.theme.generateThemes(
+      gochiusa.config.themes,
+      context.themes,
+      gochiusa.config.themeCount
+    );
+    const nextContext = gochiusa.theme.getNextContext(context, themes);
+    yield gochiusa.storage.saveContext(nextContext);
+
+    log("gentheme", nextContext.themes.join(", "));
+
+  }),
+  announce: () => co(function *() {
+
+    const context = yield gochiusa.storage.getContext();
+
+    // Tweet notice announcement
+
+    const text = gochiusa.announcement.getAnnouncement(context, new Date());
+    if (!debug) yield gochiusa.twitter.tweet(text);
+
+    log("notice");
+
+  }),
+  start: () => co(function *() {
+
+    const context = yield gochiusa.storage.getContext();
+
+    const text = gochiusa.announcement.getStartAnnouncement(context);
+    if (!debug) yield gochiusa.twitter.tweet(text);
+
+    log("start");
+
+  }),
+  finish: () => co(function *() {
+
+    const context = yield gochiusa.storage.getContext();
+
+    const text = gochiusa.announcement.getFinishAnnouncement(context);
+    if (!debug) yield gochiusa.twitter.tweet(text);
+
+    log("finish");
+
+  })
+});
