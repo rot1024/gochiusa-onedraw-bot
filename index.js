@@ -6,7 +6,9 @@ const moment = require("moment-timezone");
 const c = require("colors/safe");
 
 const gochiusa = require("./lib");
-const debug = process.argv.slice(1).includes("--debug");
+const argv = process.argv.slice(1);
+const debug = argv.indexOf("--debug") >= 0;
+const gentheme = argv.indexOf("--gentheme") >= 0;
 const jobs = require("./jobs")(log, debug);
 
 function log(tag, text) {
@@ -37,10 +39,23 @@ function createCronJob(schedule, fn) {
   }), null, false, gochiusa.config.timezone);
 }
 
-const job = debug ?
-  createCronJob("* * * * * *", date => date.second() % 4) :
-  createCronJob("0 0 19,20,22,23 * * *", date => [19, 20, 22, 23].indexOf(date.hour()));
+if (gentheme) {
 
-job.start();
+  log("start", "gentheme mode");
+  jobs.generateThemes().then(() => {
+    log("exit");
+  }).catch(err => {
+    console.error(err.stack || err);
+  });
 
-log("run", "gochiusa-onedraw-bot started" + (debug ? " [DEBUG]" : ""));
+} else {
+
+  const job = debug ?
+    createCronJob("* * * * * *", date => date.second() % 4) :
+    createCronJob("0 0 19,20,22,23 * * *", date => [19, 20, 22, 23].indexOf(date.hour()));
+
+  job.start();
+
+  log("run", "gochiusa-onedraw-bot started" + (debug ? " [DEBUG]" : ""));
+
+}
