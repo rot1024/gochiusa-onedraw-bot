@@ -12,10 +12,14 @@ module.exports = (log, debug) => ({
 
     const themes = gochiusa.theme.generateThemes(
       gochiusa.config.themes,
-      context.themes,
+      [context.themes].concat(context.prevThemes),
       gochiusa.config.themeCount
     );
-    const nextContext = gochiusa.theme.getNextContext(context, themes);
+    const nextContext = gochiusa.theme.getNextContext(
+      context,
+      themes,
+      gochiusa.config.interval
+    );
     yield gochiusa.storage.saveContext(nextContext);
 
     log("gentheme", nextContext.themes.join(", "));
