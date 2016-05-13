@@ -22,7 +22,7 @@ const job = new cron.CronJob("0 0 19,20,22,23 * * *", () => co(function *() {
 
   if (hour === 19) {
 
-    // Detect and save themes
+    // Decide and save themes
 
     const nextContext = gochiusa.theme.getNextContext(context, now);
     yield gochiusa.storage.saveContext(nextContext);
