@@ -21,7 +21,8 @@ describe("theme", () => {
         "モカ"
       ],
       "ココア",
-      "タカヒロ"
+      "タカヒロ",
+      ["青山ブルーマウンテン"]
     );
 
     assert(Array.isArray(themes));
@@ -37,7 +38,7 @@ describe("theme", () => {
 
     assert.strictEqual(_.intersection(
       themes.slice(1, -1),
-      ["ココア", "タカヒロ"]
+      ["ココア", "タカヒロ", "青山ブルーマウンテン"]
     ).length, 0);
 
     assert.strictEqual(_.difference(
