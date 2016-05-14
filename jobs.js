@@ -6,25 +6,35 @@ const gochiusa = require("./lib");
 module.exports = (log, debug) => ({
   generateThemes: () => co(function *() {
 
-    const context = yield gochiusa.storage.getContext();
+    const context = (yield gochiusa.storage.getContext()) || {
+      themes: [],
+      mainThemes: [],
+      subThemes: []
+    };
+
+    context.mainThemes = gochiusa.theme.getNextSequence(
+      context.mainThemes,
+      gochiusa.config.mainThemes
+    );
+
+    context.subThemes = gochiusa.theme.getNextSequence(
+      context.subThemes,
+      gochiusa.config.subThemes
+    );
 
     // Decide and save themes
 
-    const themes = gochiusa.theme.generateThemes(
+    context.themes = gochiusa.theme.generateThemes(
       gochiusa.config.themes,
-      [context.themes].concat(context.prevThemes),
-      gochiusa.config.themeCount
+      context.mainThemes[0],
+      context.subThemes[0]
     );
-    const nextContext = gochiusa.theme.getNextContext(
-      context,
-      themes,
-      gochiusa.config.interval
-    );
-    yield gochiusa.storage.saveContext(nextContext);
 
-    log("gentheme", nextContext.themes.join(", "));
+    yield gochiusa.storage.saveContext(context);
 
-    return nextContext;
+    log("gentheme", context.themes.join(", "));
+
+    return context;
   }),
   announce: () => co(function *() {
 

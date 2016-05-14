@@ -11,9 +11,6 @@ module.exports = {
 
   timezone: "Asia/Tokyo",
 
-  themeCount: 4,
-  interval: 1,
-
   themes: [
     "ココア",
     "チノ",
@@ -23,7 +20,18 @@ module.exports = {
     "マヤ",
     "メグ",
     "青山ブルーマウンテン",
-    "モカ",
+    "モカ"
+  ],
+
+  mainThemes: [
+    "ココア",
+    "チノ",
+    "リゼ",
+    "千夜",
+    "シャロ"
+  ],
+
+  subThemes: [
     "凛",
     "タカヒロ",
     "チノ母",

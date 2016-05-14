@@ -18,24 +18,16 @@ describe("theme", () => {
         "マヤ",
         "メグ",
         "青山ブルーマウンテン",
-        "モカ",
-        "ティッピー",
-        "ワイルドギース",
-        "あんこ"
+        "モカ"
       ],
-      [
-        [
-          "ココア",
-          "ティッピー",
-          "ワイルドギース",
-          "あんこ"
-        ]
-      ],
-      4
+      "ココア",
+      "タカヒロ"
     );
 
     assert(Array.isArray(themes));
-    assert(themes.length > 0);
+    assert.strictEqual(themes.length, 4);
+    assert.strictEqual(themes[0], "ココア");
+    assert.strictEqual(themes[3], "タカヒロ");
 
     // check duplicated values
     assert.strictEqual(_.filter(
@@ -44,8 +36,8 @@ describe("theme", () => {
     ).length, 0);
 
     assert.strictEqual(_.intersection(
-      themes,
-      ["ココア", "ティッピー", "ワイルドギース", "あんこ"]
+      themes.slice(1, -1),
+      ["ココア", "タカヒロ"]
     ).length, 0);
 
     assert.strictEqual(_.difference(
@@ -60,28 +52,33 @@ describe("theme", () => {
         "メグ",
         "青山ブルーマウンテン",
         "モカ",
-        "ティッピー",
-        "ワイルドギース",
-        "あんこ"
+        "タカヒロ"
       ]
     ).length, 0);
 
   });
 
-  it("should generate next context", () => {
+  it("should generate next sequence", () => {
 
-    const ctx = theme.getNextContext({
-      themes: ["モカ", "あんこ", "ティッピー", "ワイルドギース"],
-      prevThemes: [["A", "B"], ["C"]]
-    }, ["ココア", "千夜", "リゼ", "シャロ"], 2);
+    const seq = theme.getNextSequence(
+      ["モカ"],
+      ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
+    );
 
-    assert.deepEqual(ctx, {
-      themes: ["ココア", "千夜", "リゼ", "シャロ"],
-      prevThemes: [
-        ["モカ", "あんこ", "ティッピー", "ワイルドギース"],
-        ["A", "B"]
-      ]
-    });
+    assert(Array.isArray(seq));
+    assert.notStrictEqual(seq[0], "モカ");
+
+  });
+
+  it("should generate next sequence 2", () => {
+
+    const seq = theme.getNextSequence(
+      ["モカ", "あんこ"],
+      ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
+    );
+
+    assert(Array.isArray(seq));
+    assert.deepEqual(seq, ["あんこ"]);
 
   });
 
