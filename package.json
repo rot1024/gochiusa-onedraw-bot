@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/rot1024/gochiusa-onedraw-bot#readme",
   "engines": {
-    "node": "6.x"
+    "node": "5.x"
   },
   "dependencies": {
     "co": "^4.6.0",

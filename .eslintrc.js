@@ -191,7 +191,7 @@ module.exports = {
     "node/no-missing-require": 2,
     "node/no-unpublished-import": 2,
     "node/no-unpublished-require": 2,
-    "node/no-unsupported-features": [2, { "version": 6 }],
+    "node/no-unsupported-features": [2, { "version": 5 }],
     "node/shebang": 2
   }
 };
