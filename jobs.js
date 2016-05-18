@@ -27,7 +27,7 @@ module.exports = (log, debug) => ({
     context.themes = gochiusa.theme.generateThemes(
       gochiusa.config.themes,
       context.mainThemes[0],
-      context.subThemes[0]
+      context.subThemes[0],
       context.themes
     );
 
