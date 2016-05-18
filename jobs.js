@@ -32,6 +32,8 @@ module.exports = (log, debug) => ({
 
     yield gochiusa.storage.saveContext(context);
 
+    yield gochiusa.storage.logThemes(context);
+
     log("gentheme", context.themes.join(", "));
 
     return context;
