@@ -28,6 +28,7 @@ module.exports = (log, debug) => ({
       gochiusa.config.themes,
       context.mainThemes[0],
       context.subThemes[0]
+      context.themes
     );
 
     yield gochiusa.storage.saveContext(context);
