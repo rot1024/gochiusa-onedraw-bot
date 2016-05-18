@@ -3,6 +3,7 @@
 // eslint-disable-next-line node/no-missing-require, node/no-unpublished-require
 const config = require("./config");
 const theme = require("./lib/theme");
+const counter = require("./utils/counter");
 
 // FOR DEBUG
 
@@ -38,17 +39,4 @@ for (let i = 0; i < 100; i++) {
   // console.log(context.themes.join(","));
 }
 
-const map = new Map();
-list.forEach(e => e.forEach(f => {
-  const obj = map.get(f) || {
-    count: 0,
-    pair: {}
-  };
-  obj.count++;
-  e.forEach(g => {
-    if (g === f) return;
-    obj.pair[g] = (obj.pair[g] || 0) + 1;
-  });
-  map.set(f, obj);
-}));
-console.dir(map.entries(), { depth: null });
+counter(list);
