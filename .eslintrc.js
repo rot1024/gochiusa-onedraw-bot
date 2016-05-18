@@ -61,7 +61,7 @@ module.exports = {
     "lines-around-comment": 0,
     "max-depth": [2, 10],
     "max-len": 0,
-    "max-nested-callbacks": [2, 3],
+    "max-nested-callbacks": [1, 5],
     "max-params": 0,
     "new-cap": 2,
     "new-parens": 2,
