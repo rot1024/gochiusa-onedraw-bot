@@ -11,6 +11,8 @@ module.exports = {
 
   timezone: "Asia/Tokyo",
 
+  excludePrevThemes: false,
+
   themes: [
     "ココア",
     "チノ",
