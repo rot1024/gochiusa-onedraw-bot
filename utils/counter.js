@@ -40,6 +40,6 @@ module.exports = themes => {
   }).filter(h => h));
 
   console.log(table.toString());
-  console.log(subnames.map(n => n + ": " + (map.get(n) || { [n]: 0 })[n]).join("\n"));
+  console.log(subnames.map(n => n + ": " + (map.get(n) || { [n]: 0 })[n]).join(" | "));
 
 };
