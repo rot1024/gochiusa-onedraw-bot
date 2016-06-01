@@ -1,6 +1,7 @@
 "use strict";
 
 const co = require("co");
+
 const gochiusa = require("./lib");
 
 const t = new gochiusa.Twitter();
@@ -14,7 +15,7 @@ module.exports = (log, debug) => ({
     yield gochiusa.storage.saveContext(nextContext);
     yield gochiusa.storage.logThemes(nextContext);
 
-    log("gentheme", nextContext.themes.join(", "));
+    log("gentheme", gochiusa.utils.getThemeString(nextContext));
 
     return context;
 
