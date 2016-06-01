@@ -48,6 +48,12 @@ module.exports = {
     "あんこ"
   ],
 
-  characterFree: [0]
+  characterFree: [0],
+
+  wordThemes: {
+    date: [
+      [12, 31, "正月"]
+    ]
+  }
 
 };
