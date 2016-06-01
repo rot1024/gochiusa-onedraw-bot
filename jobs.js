@@ -3,6 +3,8 @@
 const co = require("co");
 const gochiusa = require("./lib");
 
+const t = new gochiusa.Twitter();
+
 module.exports = (log, debug) => ({
   generateThemes: () => co(function *() {
 
@@ -46,7 +48,7 @@ module.exports = (log, debug) => ({
     // Tweet notice announcement
 
     const text = gochiusa.announcement.getAnnouncement(context, new Date());
-    if (!debug) yield gochiusa.twitter.tweet(text);
+    if (!debug) yield t.tweet(text);
 
     log("notice");
 
@@ -57,7 +59,7 @@ module.exports = (log, debug) => ({
     const context = yield gochiusa.storage.getContext();
 
     const text = gochiusa.announcement.getStartAnnouncement(context);
-    if (!debug) yield gochiusa.twitter.tweet(text);
+    if (!debug) yield t.tweet(text);
 
     log("start");
 
@@ -68,7 +70,7 @@ module.exports = (log, debug) => ({
     const context = yield gochiusa.storage.getContext();
 
     const text = gochiusa.announcement.getFinishAnnouncement(context);
-    if (!debug) yield gochiusa.twitter.tweet(text);
+    if (!debug) yield t.tweet(text);
 
     log("finish");
 
