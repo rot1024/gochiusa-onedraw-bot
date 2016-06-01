@@ -69,17 +69,13 @@ describe("theme", () => {
     assert(Array.isArray(seq));
     assert.notStrictEqual(seq[0], "モカ");
 
-  });
-
-  it("should generate next sequence 2", () => {
-
-    const seq = theme.getNextSequence(
+    const seq2 = theme.getNextSequence(
       ["モカ", "あんこ"],
       ["モカ", "あんこ", "ティッピー", "ワイルドギース"]
     );
 
-    assert(Array.isArray(seq));
-    assert.deepEqual(seq, ["あんこ"]);
+    assert(Array.isArray(seq2));
+    assert.deepEqual(seq2, ["あんこ"]);
 
   });
 
