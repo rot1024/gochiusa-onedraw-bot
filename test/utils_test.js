@@ -21,6 +21,13 @@ describe("utils", () => {
 
     assert.strictEqual(str2, "free");
 
+    const str3 = utils.getThemeString({
+      themes: ["チノ", "マヤ", "メグ", "ココア"],
+      wordTheme: "うさぎ"
+    });
+
+    assert.strictEqual(str3, "チノ,マヤ,メグ,ココア|うさぎ");
+
   });
 
 });
