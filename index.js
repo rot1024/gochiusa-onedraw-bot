@@ -5,10 +5,13 @@ const cron = require("cron");
 const moment = require("moment-timezone");
 const c = require("colors/safe");
 
-const gochiusa = require("./lib");
+
 const argv = process.argv.slice(1);
 const debug = argv.indexOf("--debug") >= 0;
 const gentheme = argv.indexOf("--gentheme") >= 0;
+const modtheme = argv.indexOf("--modtheme");
+
+const gochiusa = require("./lib");
 const jobs = require("./jobs")(log, debug);
 
 function log(tag, text) {
@@ -43,6 +46,15 @@ if (gentheme) {
 
   log("start", "gentheme mode");
   jobs.generateThemes().then(() => {
+    log("exit");
+  }).catch(err => {
+    console.error(err.stack || err);
+  });
+
+} else if (modtheme >= 0) {
+
+  log("start", "modtheme mode");
+  jobs.modifyTheme(argv.slice(modtheme + 1).slice(0, 4)).then(() => {
     log("exit");
   }).catch(err => {
     console.error(err.stack || err);

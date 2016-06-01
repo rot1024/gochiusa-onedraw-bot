@@ -55,5 +55,19 @@ module.exports = (log, debug) => ({
 
     return context;
 
+  }),
+  modifyTheme: themes => co(function *() {
+
+    const context = yield gochiusa.storage.getContext();
+
+    const nextContext = Object.assign({}, context, { themes });
+
+    yield gochiusa.storage.saveContext(nextContext);
+    yield gochiusa.storage.logThemes(nextContext);
+
+    log("modtheme", gochiusa.utils.getThemeString(nextContext));
+
+    return nextContext;
+
   })
 });
