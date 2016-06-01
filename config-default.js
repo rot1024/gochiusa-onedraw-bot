@@ -46,6 +46,8 @@ module.exports = {
     "ティッピー",
     "ワイルドギース",
     "あんこ"
-  ]
+  ],
+
+  characterFree: [0]
 
 };
