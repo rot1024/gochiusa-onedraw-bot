@@ -77,6 +77,7 @@ module.exports = {
     "no-console": 0,
     "no-div-regex": 2,
     "no-else-return": 2,
+    "no-empty": 1,
     "no-empty-function": 1,
     "no-eq-null": 2,
     "no-eval": 2,
