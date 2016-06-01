@@ -161,13 +161,7 @@ module.exports = {
     }],
     "quotes": [1, "double", "avoid-escape"],
     "radix": [2, "always"],
-    "require-jsdoc": [1, {
-      "require": {
-        "FunctionDeclaration": false,
-        "MethodDefinition": true,
-        "ClassDeclaration": true
-      }
-    }],
+    "require-jsdoc": 0,
     "require-yield": 2,
     "semi": 2,
     "semi-spacing": [1, { "after": true, "before": false }],
