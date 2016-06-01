@@ -1,7 +1,6 @@
 "use strict";
 
-// eslint-disable-next-line node/no-missing-require, node/no-unpublished-require
-const config = require("./config");
+const config = require("./lib/config");
 const theme = require("./lib/theme");
 const counter = require("./utils/counter");
 

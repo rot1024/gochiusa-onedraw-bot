@@ -2,8 +2,7 @@
 
 const Table = require("cli-table");
 
-// eslint-disable-next-line node/no-missing-require, node/no-unpublished-require
-const config = require("../config");
+const config = require("../lib/config");
 
 const english = {
   ココア: "Cocoa",
