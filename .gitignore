@@ -34,5 +34,5 @@ node_modules
 
 # gochiusa-onedraw-bot
 /config.js
-context.json
-themes.log
+/data/**/*
+!/data/.gitkeep
