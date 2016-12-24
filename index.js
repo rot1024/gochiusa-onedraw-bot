@@ -5,7 +5,6 @@ const cron = require("cron");
 const moment = require("moment-timezone");
 const c = require("colors/safe");
 
-
 const argv = process.argv.slice(1);
 const debug = argv.indexOf("--debug") >= 0;
 const gentheme = argv.indexOf("--gentheme") >= 0;
@@ -34,7 +33,7 @@ function createCronJob(schedule, fn) {
     if (typeof j[i] === "function") {
       yield j[i]();
     } else {
-      log("WARN", "invalid mode: " + i);
+      log("WARN", `invalid mode: ${i}`);
     }
   }).catch(err => {
     console.error(err.stack || err);
@@ -68,6 +67,6 @@ if (gentheme) {
 
   job.start();
 
-  log("run", "gochiusa-onedraw-bot started" + (debug ? " [DEBUG]" : ""));
+  log("run", `gochiusa-onedraw-bot started${debug ? " [DEBUG]" : ""}`);
 
 }
