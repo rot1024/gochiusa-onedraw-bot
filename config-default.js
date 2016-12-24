@@ -3,10 +3,10 @@
 module.exports = {
 
   twitter: {
-    consumer_key: "",
-    consumer_secret: "",
-    access_token: "",
-    access_token_secret: ""
+    consumer_key: process.env.GODB_TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.GODB_TWITTER_CONSUMER_SECRET,
+    access_token: process.env.GODB_TWITTER_ACCESS_TOKEN,
+    access_token_secret: process.env.GODB_TWITTER_ACCESS_TOKEN_SECRET
   },
 
   timezone: "Asia/Tokyo",
