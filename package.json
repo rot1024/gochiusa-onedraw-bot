@@ -4,8 +4,9 @@
   "description": "One-hour drawing bot for gochiusa",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "test": "mocha"
+    "start": "node .",
+    "test": "mocha",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
